@@ -108,13 +108,25 @@ if (tabs.length) {
       selectRole(tab.dataset.role);
       sessionStorage.setItem('activeTab', tab.dataset.role);
 
-      // Scroll to project cards so they are visible after tab selection
+      // Scroll to the first card of the selected category
       setTimeout(() => {
-        const projectsSection = document.getElementById('projects');
-        if (projectsSection) {
-          const navH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--header-h')) || 64;
-          const filterH = document.querySelector('.filter-bar')?.offsetHeight || 44;
-          const top = projectsSection.getBoundingClientRect().top + window.scrollY - navH - filterH - 8;
+        const navH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--header-h')) || 64;
+        const filterH = document.querySelector('.filter-bar')?.offsetHeight || 44;
+        const offset = navH + filterH + 16;
+        const role = tab.dataset.role;
+        const isMobile = window.innerWidth <= 768;
+
+        let target;
+        if (role === 'all' && !isMobile) {
+          target = document.getElementById('projects');
+        } else if (role === 'all') {
+          target = document.querySelector('.proj-list-section .projects-group .proj-row');
+        } else {
+          target = document.querySelector(`#panel-${role} .proj-row`);
+        }
+
+        if (target) {
+          const top = target.getBoundingClientRect().top + window.scrollY - offset;
           window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
         }
       }, 50);
