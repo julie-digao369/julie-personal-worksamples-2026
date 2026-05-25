@@ -275,9 +275,21 @@
       font-size: 0.9375rem;
       font-weight: 600;
       color: var(--text);
-      margin-bottom: 0.35rem;
+      margin-bottom: 0.55rem;
       letter-spacing: -0.01em;
       font-family: var(--font);
+    }
+    .cs-outcome-who {
+      display: block;
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-family: var(--font);
+      padding-top: 0.55rem;
+      margin-bottom: 0.6rem;
+      border-top: 1px solid var(--border-light);
     }
     .cs-outcome-card p {
       font-size: 0.875rem;
@@ -465,6 +477,14 @@
         <p class="cs-section-label">Service flows designed</p>
         <h2>Two access tiers within a single system</h2>
 
+        <p>Before touching any screen, I mapped every operator scenario across the trip lifecycle: booking, pre-driving, driving, and park-up. The map covers unplanned and scheduled use plus the maintenance reporting path, which made the failure points and the access tiers obvious.</p>
+
+        <picture>
+          <source srcset="img/mercedes-ewagon/operator-use-cases.webp" type="image/webp">
+          <img src="img/mercedes-ewagon/operator-use-cases.jpg" width="1262" height="908" alt="Operator use-case map across booking, pre-driving, driving, and park-up phases" class="cs-img" loading="lazy" />
+        </picture>
+        <p class="cs-img-caption">The operator use-case map. Each row is a scenario (unplanned standard, unplanned urgent, scheduled, maintenance) traced across the four trip phases. The two unplanned in-station flows became the core of the deployed system.</p>
+
         <div class="cs-usecases">
           <div class="cs-usecase">
             <div class="cs-usecase-label">Standard flow</div>
@@ -477,6 +497,18 @@
             <p>Escalation path for production-critical tasks when a local station is depleted. The system triggers passive redistribution from adjacent stations — no manual supervisor intervention required.</p>
           </div>
         </div>
+
+        <picture>
+          <source srcset="img/mercedes-ewagon/walk-up-flow.webp" type="image/webp">
+          <img src="img/mercedes-ewagon/walk-up-flow.jpg" width="2186" height="1196" alt="Standard walk-up flow storyboard, six steps from station to trip end" class="cs-img" loading="lazy" />
+        </picture>
+        <p class="cs-img-caption">Standard walk-up flow. Jan walks to the station, books a functional E-wagon at the kiosk with his employee card, unlocks it with the physical key, drives, parks, charges, and ends the trip in the app.</p>
+
+        <picture>
+          <source srcset="img/mercedes-ewagon/urgent-flow.webp" type="image/webp">
+          <img src="img/mercedes-ewagon/urgent-flow.jpg" width="2180" height="1198" alt="Time-critical flow storyboard, six steps when the home station is empty" class="cs-img" loading="lazy" />
+        </picture>
+        <p class="cs-img-caption">Time-critical flow. When the home station is empty, the worker calls the current driver or checks nearby stations, bicycles to the next one, takes an available E-wagon, and completes the trip there.</p>
 
         <p style="font-size:0.9375rem;color:var(--secondary);line-height:1.6;margin:1.5rem 0 0.25rem;font-family:var(--font-serif)">Five hardware and software components work in concert at each station.</p>
         <div class="cs-sys-list">
@@ -544,25 +576,29 @@
       <!-- Outcome -->
       <div class="cs-section fade-in">
         <p class="cs-section-label">Outcome</p>
-        <h2>Four deliverables — from field data to a deployable system</h2>
-        <p>The sprint produced a complete, implementation-ready package: not just a concept, but the user research, system specification, station network, and academic validation needed to take the framework from proposal to deployment.</p>
+        <h2>Key benefits of our proposal</h2>
+        <p>The station-based model won approval on four fronts, one for each stakeholder who has to live with the system.</p>
 
         <div class="cs-outcome-grid">
           <div class="cs-outcome-card">
-            <h4>Station-based sharing framework</h4>
-            <p>A fully specified pooling model — service logic, access flows, and operating rules — designed to run within Sindelfingen's existing infrastructure with no mandatory behaviour change from workers.</p>
+            <h4>Minimized initial investment</h4>
+            <span class="cs-outcome-who">Management</span>
+            <p>It runs on what the plant already has: the kiosk, employee ID cards, and the wagon's physical key. No worker-facing app, no dedicated devices to issue, no fleet replacement.</p>
           </div>
           <div class="cs-outcome-card">
-            <h4>Recommended station network</h4>
-            <p>14 sharing stations mapped across the plant, each with a 150m service radius to ensure complete floor coverage. Locations validated against movement patterns and infrastructure constraints.</p>
+            <h4>Simple and quick implementation</h4>
+            <span class="cs-outcome-who">Operation &amp; Maintenance</span>
+            <p>The hardware is off-the-shelf. The EKB blocks the key and reads battery over CAN bus, and the charger reports status on its own. No vehicle connectivity to provision, so stations go live one at a time.</p>
           </div>
           <div class="cs-outcome-card">
-            <h4>System architecture specification</h4>
-            <p>Hardware and software component design — station kiosk, EKB key blocker, charger integration, employee ID access, and centralised backend — specified to operate without a worker-facing app.</p>
+            <h4>Usage pattern consistent with existing workflow</h4>
+            <span class="cs-outcome-who">High demand operator</span>
+            <p>Walk up, take a wagon, return it to any station. No booking, no reservation, no waiting. It mirrors how workers already grab a wagon, so adoption asks for no new habit.</p>
           </div>
           <div class="cs-outcome-card">
-            <h4>Academic contribution at KIT IPEK</h4>
-            <p>The interdisciplinary methodology — combining ethnographic UX research with mechanical systems engineering — was incorporated as a case study in a doctoral dissertation at KIT IPEK, validating the co-creation approach for industrial mobility contexts.</p>
+            <h4>More utilization, same fleet</h4>
+            <span class="cs-outcome-who">All the operators</span>
+            <p>Pooling collapses each zone's idle buffer into one shared supply. The same fleet covers more demand, and real-time station inventory ends the time lost hunting for a free wagon.</p>
           </div>
         </div>
 
