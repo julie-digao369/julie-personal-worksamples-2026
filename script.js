@@ -194,7 +194,7 @@ if ('IntersectionObserver' in window) {
         fadeObserver.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.15 });
+  }, { threshold: 0 });
 
   fadeEls.forEach(el => fadeObserver.observe(el));
 }
