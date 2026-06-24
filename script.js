@@ -46,32 +46,10 @@ if (navToggle && navLinks) {
 }
 
 // ── Role / tab selector ──────────────────────────────────────
-const tabs          = document.querySelectorAll('.role-tab');
-const roleTabsNav   = document.querySelector('.role-tabs');
-const projCards     = document.querySelectorAll('.proj-card[data-group]');
-const projSection   = document.querySelector('.proj-scroll-section');
-const projTrack     = document.querySelector('.proj-scroll-track');
+const tabs            = document.querySelectorAll('.role-tab');
+const roleTabsNav     = document.querySelector('.role-tabs');
 const projListSection = document.querySelector('.proj-list-section');
-const projGroups    = document.querySelectorAll('.proj-list-section .projects-group');
-
-let marqueeReady = false;
-
-function setupMarquee() {
-  if (marqueeReady) return;
-  [...projCards].forEach(card => {
-    const clone = card.cloneNode(true);
-    clone.setAttribute('aria-hidden', 'true');
-    clone.setAttribute('tabindex', '-1');
-    projTrack.appendChild(clone);
-  });
-  marqueeReady = true;
-}
-
-function teardownMarquee() {
-  if (!marqueeReady) return;
-  projTrack.querySelectorAll('[aria-hidden="true"]').forEach(el => el.remove());
-  marqueeReady = false;
-}
+const projGroups      = document.querySelectorAll('.proj-list-section .projects-group');
 
 function selectRole(role) {
   tabs.forEach(tab => {
@@ -81,25 +59,12 @@ function selectRole(role) {
     tab.setAttribute('tabindex', isActive ? '0' : '-1');
   });
 
-  if (!projSection || !projListSection) return;
+  if (!projListSection) return;
 
-  const isMobile = window.innerWidth <= 768;
-
-  if (role === 'all' && !isMobile) {
-    projSection.hidden = false;
-    projListSection.hidden = true;
-    projCards.forEach(card => { card.hidden = false; });
-    setupMarquee();
-    projSection.classList.add('marquee-active');
-  } else {
-    projSection.hidden = true;
-    projSection.classList.remove('marquee-active');
-    teardownMarquee();
-    projListSection.hidden = false;
-    projGroups.forEach(group => {
-      group.hidden = role !== 'all' && group.dataset.group !== role;
-    });
-  }
+  projListSection.hidden = false;
+  projGroups.forEach(group => {
+    group.hidden = group.dataset.group !== role;
+  });
 }
 
 if (tabs.length) {
@@ -113,17 +78,7 @@ if (tabs.length) {
         const navH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--header-h')) || 64;
         const filterH = document.querySelector('.filter-bar')?.offsetHeight || 44;
         const offset = navH + filterH + 16;
-        const role = tab.dataset.role;
-        const isMobile = window.innerWidth <= 768;
-
-        let target;
-        if (role === 'all' && !isMobile) {
-          target = document.getElementById('projects');
-        } else if (role === 'all') {
-          target = document.querySelector('.proj-list-section .projects-group .proj-row');
-        } else {
-          target = document.querySelector(`#panel-${role} .proj-row`);
-        }
+        const target = document.querySelector(`#panel-${tab.dataset.role} .proj-row`);
 
         if (target) {
           const top = target.getBoundingClientRect().top + window.scrollY - offset;
@@ -164,7 +119,8 @@ if (roleTabsNav) {
 
 // Restore last active tab
 const savedTab = sessionStorage.getItem('activeTab');
-selectRole(savedTab || 'all');
+const validRoles = ['design', 'research', 'automation'];
+selectRole(validRoles.includes(savedTab) ? savedTab : 'design');
 
 // ── Scroll-based fade-in animations ─────────────────────────
 

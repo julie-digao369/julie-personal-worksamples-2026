@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Aurio Smart Hearing Aids Control App · Case Study · Julie Di Gao</title>
+  <meta name="description" content="Interaction design for Aurio, a control app for hearing aids hidden inside glasses. Pairing, volume, tone, and noise controls built around plain language. Launched, and live to try." />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Aurio Smart Hearing Aids Control App · Julie Di Gao" />
+  <meta property="og:description" content="Interaction design for a control app for hearing aids hidden inside glasses. Pairing, volume, tone, and noise built around plain language. Live to try." />
+  <meta property="og:url" content="https://juliedigao.info/aurio-app.html" />
+  <meta property="og:image" content="https://juliedigao.info/img/aurio-thumb.webp" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="canonical" href="https://juliedigao.info/aurio-app.html" />
+  <link rel="preload" href="fonts/dm-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/dm-serif-display-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="fonts.css" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .layout, .sidebar, .content { display: contents; }
+
+    /* ============================================================
+       Aurio case study bespoke layout (scoped to this page only)
+       Gradient-driven, full-bleed bands. Not the blog column.
+       ============================================================ */
+
+    /* ── Nav: transparent over the light hero, solid greige on scroll ── */
+    .cs-page .site-nav {
+      background: transparent; backdrop-filter: none; -webkit-backdrop-filter: none;
+      border-bottom-color: transparent;
+      transition: background .3s ease, border-color .3s ease;
+    }
+    .cs-page .site-nav.scrolled {
+      background: rgba(230,231,226,.92);
+      backdrop-filter: blur(14px) saturate(1.3); -webkit-backdrop-filter: blur(14px) saturate(1.3);
+      border-bottom-color: rgba(65,69,79,.12);
+    }
+    .cs-page .nav-name { color: #41454F; }
+    .cs-page .nav-linkedin { color: rgba(65,69,79,.7); }
+    .cs-page .nav-links a { color: rgba(65,69,79,.82); }
+    .cs-page .nav-links a:hover { color: #2D2C2B; }
+    .cs-page .nav-links .nav-cta {
+      background: transparent; color: rgba(65,69,79,.82);
+      border: 0; box-shadow: none; padding: .5rem 0; border-radius: 0;
+    }
+    .cs-page .nav-links .nav-cta:hover { background: transparent; color: #2D2C2B; transform: none; }
+    .cs-page .nav-toggle span { background: #41454F; }
+    /* Mobile menu open: panel turns white, so flip toggle/name/cta back to dark */
+    .cs-page .site-nav:has(.nav-links.open) .nav-toggle span { background: #111; }
+    .cs-page .site-nav:has(.nav-links.open) .nav-name { color: var(--text); }
+    .cs-page .site-nav:has(.nav-links.open) .nav-links .nav-cta { color: var(--secondary); }
+
+    /* ── Hero: greige base with large, soft ambient light (Oura-like) ── */
+    .au-hero {
+      position: relative; padding-top: var(--header-h); color: #41454F; overflow: hidden;
+      background:
+        radial-gradient(88% 80% at 36% 12%, #F0EFEA 0%, rgba(240,239,234,0) 62%),
+        radial-gradient(96% 88% at 22% 106%, rgba(195,203,199,.46) 0%, rgba(195,203,199,0) 66%),
+        #E6E7E2;
+    }
+    .au-hero-inner {
+      max-width: 1280px; margin-inline: auto;
+      padding: 0.5rem clamp(1.5rem, 5vw, 4rem) clamp(2.5rem, 5vw, 4rem);
+      min-height: calc(100svh - var(--header-h) - 60px);
+      display: grid; grid-template-columns: 1fr 1.05fr;
+      gap: clamp(2rem, 4.5vw, 4.5rem); align-items: center;
+    }
+    .au-title {
+      font-family: var(--font-display); font-weight: 400;
+      font-size: clamp(2.5rem, 5vw, 4.1rem); line-height: 1.05; letter-spacing: -.02em;
+      color: #41454F; margin: 0 0 1.4rem;
+    }
+    .au-sub {
+      font-size: clamp(.98rem, 1.2vw, 1.12rem); line-height: 1.6;
+      color: rgba(65,69,79,.82); max-width: 44ch; margin: 0 0 2.5rem;
+    }
+    .au-meta {
+      display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.5rem 3rem; max-width: 30rem;
+    }
+    .au-meta-label {
+      display: block; font-size: .7rem; font-weight: 600; letter-spacing: .1em;
+      text-transform: uppercase; color: #595d66; margin-bottom: .45rem;
+    }
+    .au-meta-value { font-size: 1rem; font-weight: 500; color: #41454F; }
+
+    .au-hero-visual { position: relative; display: flex; justify-content: center; align-items: center; }
+    .au-hero-art {
+      width: 100%; height: auto; max-height: calc(100svh - var(--header-h) - 4rem);
+      object-fit: contain; display: block;
+      filter: drop-shadow(0 26px 46px rgba(57,55,53,.22));
+    }
+
+    /* ── Explainer band: dark espresso, light text ── */
+    .au-explain { background: #393735; color: #E6E7E2; }
+    .au-explain-inner {
+      max-width: 1240px; margin-inline: auto;
+      padding: clamp(3.5rem, 7vw, 6.5rem) clamp(1.5rem, 5vw, 4rem);
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1.75rem, 3vw, 3rem);
+    }
+    .au-card { text-align: center; }
+    .au-card-media {
+      aspect-ratio: 1 / 1; border-radius: 18px; overflow: hidden;
+      background: linear-gradient(160deg, #f4f4f6, #e7e7ea);
+      box-shadow: 0 26px 52px -28px rgba(0,0,0,.5);
+    }
+    .au-card-media img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
+    .au-card-media.is-center img { object-position: center; }
+    .au-card h3 {
+      font-family: var(--font-display); font-weight: 400; letter-spacing: -.01em;
+      font-size: clamp(1.3rem, 1.9vw, 1.65rem); color: #F0EFEC; margin: 1.7rem 0 .85rem;
+    }
+    .au-card p { font-size: .92rem; line-height: 1.62; color: rgba(230,231,226,.72); margin: 0 auto; max-width: 36ch; }
+
+    /* ── Showcase band: soft greige to cool light, one large phone ── */
+    .au-showcase {
+      display: flex; flex-direction: column; align-items: center;
+      padding: clamp(3.5rem, 8vw, 7rem) clamp(1.5rem, 5vw, 4rem) clamp(4rem, 9vw, 8rem);
+      background: linear-gradient(180deg, #ECEBE8 0%, #DDE2E3 100%);
+    }
+    .au-showcase-title {
+      font-family: var(--font-display); font-weight: 400; letter-spacing: -.01em;
+      color: #41454F; text-align: center; line-height: 1.12; max-width: none;
+      font-size: clamp(1.6rem, 3.2vw, 2.5rem); margin: 0 0 clamp(2rem, 4vw, 3rem);
+    }
+    .au-proto { display: flex; flex-direction: column; align-items: center; }
+    .au-proto-frame {
+      position: relative; width: min(360px, 84vw); aspect-ratio: 384 / 846;
+      padding: 8px; border-radius: 44px;
+      background: linear-gradient(165deg, #2a2e35, #3c414a);
+      box-shadow: 0 60px 120px -42px rgba(45,44,43,.42), 0 16px 40px -22px rgba(45,44,43,.28);
+    }
+    .au-proto-frame iframe {
+      position: absolute; inset: 8px; width: calc(100% - 16px); height: calc(100% - 16px);
+      border: 0; border-radius: 36px; background: #fff; display: block;
+    }
+    /* ── Closing CTA: near-black warm banner (#2D2C2B) ── */
+    .au-cta {
+      background: #2D2C2B;
+      text-align: center; padding: clamp(3.25rem, 7vw, 5.5rem) clamp(1.5rem, 6vw, 4rem);
+    }
+    .au-cta a {
+      font-family: var(--font-display); font-weight: 400; letter-spacing: -.01em;
+      font-size: clamp(1.55rem, 3.4vw, 2.7rem); line-height: 1.25; color: #E6E7E2;
+      max-width: none; margin-inline: auto; display: inline-block; text-decoration: none;
+      transition: color .2s ease;
+    }
+    .au-cta a:hover { color: #ffffff; }
+
+    /* ── Responsive ── */
+    @media (max-width: 920px) {
+      .au-hero-inner { grid-template-columns: 1fr; min-height: 0; gap: 2.75rem; }
+      .au-hero-visual { order: -1; }
+      .au-hero-art { max-width: min(420px, 82vw); }
+    }
+    @media (max-width: 720px) {
+      .au-explain-inner { grid-template-columns: 1fr; gap: 2.5rem; max-width: 26rem; }
+      .au-card-media { aspect-ratio: 4 / 3; }
+    }
+    @media (max-width: 480px) {
+      .au-meta { gap: 1.25rem 1.5rem; }
+    }
+    /* ── Footer: dark grey on this page ── */
+    .cs-page .site-footer {
+      background: #3C3C3C;
+      color: rgba(230,231,226,.66);
+      border-top: none;
+    }
+    .cs-page .site-footer a { color: rgba(230,231,226,.82); }
+    .cs-page .site-footer a:hover { color: #fff; }
+
+    /* ── Scroll reveal: silky fade + gravity settle ── */
+    .js-anim .au-reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition:
+        opacity .9s cubic-bezier(.16,1,.3,1) var(--rd, 0ms),
+        transform 1.05s cubic-bezier(.16,1,.3,1) var(--rd, 0ms);
+    }
+    /* heavier elements fall a little further, for weight */
+    .js-anim .au-reveal.is-heavy { transform: translateY(64px); }
+    .js-anim .au-reveal.is-in { opacity: 1; transform: none; }
+    .au-reveal.d1 { --rd: 90ms; }
+    .au-reveal.d2 { --rd: 180ms; }
+    .au-reveal.d3 { --rd: 270ms; }
+    .au-explain-inner .au-card:nth-child(2) { --rd: 120ms; }
+    .au-explain-inner .au-card:nth-child(3) { --rd: 240ms; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .au-cta a { transition: none; }
+      .js-anim .au-reveal { opacity: 1; transform: none; transition: none; }
+    }
+  </style>
+  <script>document.documentElement.classList.add('js-anim');</script>
+</head>
+<body class="cs-page">
+  <a class="skip-link" href="#cs-main">Skip to content</a>
+
+  <nav class="site-nav">
+    <div class="nav-left">
+      <a href="index.html" class="nav-name">Julie Di Gao</a>
+      <a href="https://www.linkedin.com/in/julie-gao-9985a615b/" class="nav-linkedin" target="_blank" rel="noopener" aria-label="LinkedIn profile">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+        </svg>
+      </a>
+    </div>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    <div class="nav-links">
+      <a href="index.html#projects">Work</a>
+      <a href="about.html">About</a>
+      <a href="https://mail.google.com/mail/?view=cm&amp;to=julie.gao369@gmail.com" target="_blank" rel="noopener" class="nav-cta">Contact</a>
+    </div>
+  </nav>
+
+  <main id="cs-main">
+
+    <!-- ── Hero ── -->
+    <section class="au-hero">
+      <div class="au-hero-inner">
+        <div class="au-hero-text">
+          <h1 class="au-title au-reveal">Smart glasses companion&nbsp;app</h1>
+          <p class="au-sub au-reveal d1">The control app for a high-end pair of smart hearing aids glasses, built for one of the biggest US audio brands. Aurio is an alias. The real client stays under NDA. The content here is derived from a real project without any confidential information.</p>
+          <div class="au-meta au-reveal d2">
+            <div class="au-meta-item"><span class="au-meta-label">Role</span><span class="au-meta-value">Interaction Design</span></div>
+            <div class="au-meta-item"><span class="au-meta-label">Status</span><span class="au-meta-value">Launched</span></div>
+            <div class="au-meta-item"><span class="au-meta-label">Period</span><span class="au-meta-value">March–May 2026</span></div>
+            <div class="au-meta-item"><span class="au-meta-label">Scope</span><span class="au-meta-value">Visual iteration</span></div>
+          </div>
+        </div>
+        <div class="au-hero-visual au-reveal is-heavy d1">
+          <img class="au-hero-art" src="img/aurio-hero-group.webp" width="1250" height="1576" alt="A woman wearing the Aurio glasses, with the app's volume control and Smart Program cards floating beside her" fetchpriority="high" />
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Explainer ── -->
+    <section class="au-explain">
+      <div class="au-explain-inner">
+        <article class="au-card au-reveal">
+          <div class="au-card-media is-center">
+            <img src="img/rams-braun-radio.webp" width="880" height="866" alt="Dieter Rams Braun radio with one large tuning dial, the reference for the volume control" loading="lazy" />
+          </div>
+          <h3>Built around one dial</h3>
+          <p>Volume is the control people reach for most, so it gets the most room on the home screen. The dial is shaped like an old radio, familiar in the hand and a quiet nod to Dieter Rams' Braun design.</p>
+        </article>
+        <article class="au-card au-reveal">
+          <div class="au-card-media is-center">
+            <img src="img/aurio-semantics.webp?v=3" width="748" height="648" alt="The same app shown in three color modes: a quiet lavender mode, a warm conversation mode, and a green outdoors mode" loading="lazy" />
+          </div>
+          <h3>Color does the talking</h3>
+          <p>Each listening mode has its own color and icon. Switch to Conversation, Outdoors, or Quiet and the whole screen shifts to match. You read the mode before you read a word.</p>
+        </article>
+        <article class="au-card au-reveal">
+          <div class="au-card-media is-center">
+            <img src="img/aurio-ai-loop.webp" width="1400" height="1400" alt="The design loop: a Figma design concept becomes a Claude Code HTML prototype, then returns to a Figma UI kit, connected by MCP" loading="lazy" />
+          </div>
+          <h3>Figma to code, and back</h3>
+          <p>Premium feel lives in the micro interactions, and those are hard to judge from a flat mockup. So I built the prototype in HTML with Claude Code. The team felt the real thing early, which cut the back-and-forth and the build time.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ── Showcase: live, embedded prototype (real app code, not a link) ── -->
+    <section class="au-showcase">
+      <h2 class="au-showcase-title au-reveal">Try it. Feel it yourself.</h2>
+      <div class="au-proto au-reveal is-heavy d1">
+        <div class="au-proto-frame">
+          <iframe src="aurio-prototype/index.html" title="Aurio control app, live interactive prototype" loading="lazy"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Closing CTA ── -->
+    <section class="au-cta">
+      <a href="https://mail.google.com/mail/?view=cm&amp;to=julie.gao369@gmail.com" target="_blank" rel="noopener" class="au-reveal">A premium experience,<br>for the customer who can tell the difference.</a>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span>&copy; 2026 Julie Di Gao</span>
+    <a href="mailto:julie.gao369@gmail.com">julie.gao369@gmail.com</a>
+  </footer>
+
+  <script src="script.js" defer></script>
+  <script>
+    /* Scroll reveal: fade + gravity settle, one-shot per element */
+    (function () {
+      var els = document.querySelectorAll('.au-reveal');
+      if (!els.length) return;
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduce || !('IntersectionObserver' in window)) {
+        els.forEach(function (el) { el.classList.add('is-in'); });
+        return;
+      }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) {
+            e.target.classList.add('is-in');
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.16, rootMargin: '0px 0px -8% 0px' });
+      els.forEach(function (el) { io.observe(el); });
+    })();
+  </script>
+</body>
+</html>

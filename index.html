@@ -101,152 +101,15 @@
 
     <!-- FILTER BAR -->
 
-    <div class="filter-bar">
+    <div class="filter-bar" id="projects">
       <div class="filter-inner">
         <div class="role-tabs" role="tablist" aria-label="Work categories" id="track-select">
-          <button class="role-tab" role="tab" id="tab-all" data-role="all" aria-selected="false" aria-controls="panel-design panel-research panel-automation" tabindex="0">All Work Sample</button>
-          <button class="role-tab" role="tab" id="tab-design" data-role="design" aria-selected="false" aria-controls="panel-design" tabindex="-1">Design</button>
+          <button class="role-tab" role="tab" id="tab-design" data-role="design" aria-selected="false" aria-controls="panel-design" tabindex="0">Design</button>
           <button class="role-tab" role="tab" id="tab-research" data-role="research" aria-selected="false" aria-controls="panel-research" tabindex="-1">Research</button>
           <button class="role-tab" role="tab" id="tab-automation" data-role="automation" aria-selected="false" aria-controls="panel-automation" tabindex="-1">AI Tooling</button>
         </div>
       </div>
     </div>
-
-    <!-- PROJECTS -->
-    <section class="proj-scroll-section" id="projects">
-      <div class="proj-scroll-track">
-
-        <a href="orka-health.html" class="proj-card" data-group="design">
-          <div class="proj-card-visual" style="background: linear-gradient(145deg, #FBDBD0 0%, #F3E1C6 100%);">
-            <picture>
-              <source srcset="img/orka-thumb-480w.webp 480w, img/orka-thumb-960w.webp 960w" sizes="(max-width: 768px) 100vw, 408px" type="image/webp">
-              <img loading="lazy" src="img/orka-thumb.jpg" width="1440" height="920" alt="Orka Two hearing aids app onboarding screens" />
-            </picture>
-          </div>
-          <div class="proj-card-body">
-            <span class="proj-cat">B2C App</span>
-            <h3 class="proj-card-title">Orka Two Hearing Aids App Onboarding</h3>
-            <p class="proj-card-desc">New hearing aid users were returning devices within two weeks. I redesigned onboarding around that critical window. Result: 5.3/7 satisfaction score.</p>
-          </div>
-        </a>
-
-        <a href="dog-cardiac.html" class="proj-card" data-group="design">
-          <div class="proj-card-visual" style="background: linear-gradient(145deg, #C8DBF8 0%, #E2EDFF 100%);">
-            <picture>
-              <source srcset="img/petstech-480w.webp 480w, img/petstech-960w.webp 960w" sizes="(max-width: 768px) 100vw, 408px" type="image/webp">
-              <img loading="lazy" src="img/petstech.jpg" width="4000" height="2247" alt="PetsTech cardiac monitor device" />
-            </picture>
-          </div>
-          <div class="proj-card-body">
-            <span class="proj-cat">Hardware UI</span>
-            <h3 class="proj-card-title">PetsTech Cardiac Monitor UI Design</h3>
-            <p class="proj-card-desc">A 20,000 CNY veterinary cardiac monitor with a segment LCD display. Every pixel is a hardware cost. Three concepts. One shipped.</p>
-          </div>
-        </a>
-
-        <a href="rullja-app.html" class="proj-card" data-group="design">
-          <div class="proj-card-visual" style="background: linear-gradient(145deg, #D4EDD6 0%, #C8DBF8 100%);">
-            <picture>
-              <source srcset="img/rullja/rullja-software-480w.webp 480w, img/rullja/rullja-software-960w.webp 960w" sizes="(max-width: 768px) 100vw, 408px" type="image/webp">
-              <img loading="lazy" src="img/rullja/rullja-software.png" width="1756" height="1154" alt="RullJa IoT dashboard interface" />
-            </picture>
-          </div>
-          <div class="proj-card-body">
-            <span class="proj-cat">Dashboard Design</span>
-            <h3 class="proj-card-title">RullJa IoT Dashboard — Investor Demo</h3>
-            <p class="proj-card-desc">A waste-tech startup needed to pitch IoT fill-level sensors to investors. €100M+ addressable segment in Germany.</p>
-          </div>
-        </a>
-
-        <a href="agile-cps.html" class="proj-card" data-group="research">
-          <div class="proj-card-visual" style="background: linear-gradient(145deg, #93B8FD 0%, #C8DBF8 100%);">
-            <picture>
-              <source srcset="img/agile-cps-480w.webp 480w, img/agile-cps-960w.webp 960w" sizes="(max-width: 768px) 100vw, 408px" type="image/webp">
-              <img loading="lazy" src="img/agile-cps.png" width="1000" height="618" alt="Agile CPS research visualization" />
-            </picture>
-          </div>
-          <div class="proj-card-body">
-            <span class="proj-cat">Research · ECIE 2025</span>
-            <h3 class="proj-card-title">Agile Methods in CPS Startups &amp; SMEs</h3>
-            <p class="proj-card-desc">Master's thesis published at ECIE 2025. 1,929 papers reviewed with an AI-assisted extraction workflow.</p>
-          </div>
-        </a>
-
-        <a href="mercedes-ewagon.html" class="proj-card" data-group="research">
-          <div class="proj-card-visual" style="background: linear-gradient(145deg, #F3E1C6 0%, #FBDBD0 100%);">
-            <picture>
-              <source srcset="img/mercedesetrolley-480w.webp 480w, img/mercedesetrolley-960w.webp 960w" sizes="(max-width: 768px) 100vw, 408px" type="image/webp">
-              <img loading="lazy" src="img/mercedesetrolley.jpg" width="1600" height="1061" alt="Mercedes-Benz e-Wagen factory floor" />
-            </picture>
-          </div>
-          <div class="proj-card-body">
-            <span class="proj-cat">Service Design</span>
-            <h3 class="proj-card-title">E-Wagen Simplification @ Mercedes-Benz</h3>
-            <p class="proj-card-desc">Factory floor user research at Sindelfingen. Personas, journey maps, and a full service design for e-trolley sharing.</p>
-          </div>
-        </a>
-
-        <a href="german-telehealth.html" class="proj-card" data-group="research">
-          <div class="proj-card-visual" style="background: linear-gradient(145deg, #E0DAEE 0%, #C8DBF8 100%);">
-            <picture>
-              <source srcset="img/telehealth-de-480w.webp 480w, img/telehealth-de-960w.webp 960w" sizes="(max-width: 768px) 100vw, 408px" type="image/webp">
-              <img loading="lazy" src="img/telehealth-de.png" width="920" height="690" alt="German telehealth infrastructure mapping" />
-            </picture>
-          </div>
-          <div class="proj-card-body">
-            <span class="proj-cat">Critical Infrastructure</span>
-            <h3 class="proj-card-title">German Telehealth Infrastructure Mapping</h3>
-            <p class="proj-card-desc">Mapped German hospital network architectures as a structural baseline for NIS2 threat modeling. Commissioned by KIT OCI.</p>
-          </div>
-        </a>
-
-        <a href="rullja-smart-bin.html" class="proj-card" data-group="research">
-          <div class="proj-card-visual" style="background: linear-gradient(145deg, #D4EDD6 0%, #F3E1C6 100%);">
-            <picture>
-              <source srcset="img/rullja-bin-480w.webp 480w, img/rullja-bin-960w.webp 960w" sizes="(max-width: 768px) 100vw, 408px" type="image/webp">
-              <img loading="lazy" src="img/rullja-bin.png" width="1100" height="757" alt="Rullja smart bin sensor" />
-            </picture>
-          </div>
-          <div class="proj-card-body">
-            <span class="proj-cat">Market Research</span>
-            <h3 class="proj-card-title">Rullja Smart Bin Sensor — Market Report</h3>
-            <p class="proj-card-desc">TAM/SAM/SOM sizing, 10 competitors mapped, buyer segmentation, and a three-phase go-to-market for the municipal space.</p>
-          </div>
-        </a>
-
-        <a href="ipek-gpt.html" class="proj-card" data-group="automation">
-          <div class="proj-card-visual" style="background: linear-gradient(145deg, #F3E1C6 0%, #FBDBD0 100%);">
-            <picture>
-              <source srcset="img/ipek-gpt-thumb-480w.webp 480w, img/ipek-gpt-thumb-960w.webp 960w" sizes="(max-width: 768px) 100vw, 408px" type="image/webp">
-              <img loading="lazy" src="img/ipek-gpt-thumb.jpg" width="1600" height="1066" alt="IPEK AI Consultant interface" />
-            </picture>
-          </div>
-          <div class="proj-card-body">
-            <span class="proj-cat">AI Tooling</span>
-            <h3 class="proj-card-title">Engineering Knowledge into an AI Consultant</h3>
-            <p class="proj-card-desc">Two AI tools for KIT IPEK. Used by 50+ students. Built at zero software cost in half the expected timeline.</p>
-          </div>
-        </a>
-
-        <div class="proj-card card--nda" data-group="automation"
-             role="button" tabindex="0"
-             data-modal-title="Cincobox Bill AutoBot"
-             data-modal-body="This work is confidential. Reach out to talk about how I approach this type of problem.">
-          <div class="proj-card-visual" style="background: linear-gradient(145deg, #C8DBF8 0%, #D4EDD6 100%);">
-            <picture>
-              <source srcset="img/invoice-automation-480w.webp 480w, img/invoice-automation-960w.webp 960w" sizes="(max-width: 768px) 100vw, 408px" type="image/webp">
-              <img loading="lazy" src="img/invoice-automation.png" width="1100" height="728" alt="Cincobox invoice automation" />
-            </picture>
-          </div>
-          <div class="proj-card-body">
-            <span class="proj-cat">Automation <span class="project-badge">Confidential</span></span>
-            <h3 class="proj-card-title">Cincobox Bill AutoBot</h3>
-            <p class="proj-card-desc">A CEO was losing one full day every month to manual invoicing. I restructured the database and built an automation.</p>
-          </div>
-        </div>
-
-      </div>
-    </section>
 
     <!-- PROJECTS: grouped list view (Design / Research / AI Tooling tabs) -->
     <div class="proj-list-section" hidden>
@@ -254,6 +117,22 @@
     <section class="projects-stage">
 
       <div class="projects-group" id="panel-design" data-group="design" hidden>
+
+        <div class="proj-row proj-row--flip fade-in">
+          <div class="proj-text">
+            <span class="proj-cat">Interaction Design</span>
+            <h3 class="proj-title"><a href="aurio-app.html">Smart glasses companion app</a></h3>
+            <hr class="proj-rule" />
+            <p class="proj-meta">Launched | Interaction Design, Hearing Health</p>
+            <p class="proj-desc">Hearing aids, hidden inside a pair of glasses. No one knows you're wearing them. The companion app is in on the secret, and it keeps you at the top of your game.</p>
+            <a href="aurio-app.html" class="proj-link">View project →</a>
+          </div>
+          <div class="proj-image">
+            <a href="aurio-app.html">
+              <img loading="lazy" src="img/aurio-hero-photo.webp" width="749" height="1024" alt="A woman wearing the Aurio glasses that hide her hearing aids" />
+            </a>
+          </div>
+        </div>
 
         <div class="proj-row fade-in">
           <div class="proj-image">
@@ -472,7 +351,7 @@
     </div>
   </div>
 
-  <script src="script.js" defer></script>
+  <script src="script.js?v=2" defer></script>
   <script src="reference-banner.js"></script>
 </body>
 </html>
