@@ -126,13 +126,16 @@
     .au-proto { display: flex; flex-direction: column; align-items: center; }
     .au-proto-frame {
       position: relative; width: min(360px, 84vw); aspect-ratio: 384 / 846;
-      padding: 8px; border-radius: 44px;
+      padding: 8px; border-radius: 44px; overflow: hidden;
       background: linear-gradient(165deg, #2a2e35, #3c414a);
       box-shadow: 0 60px 120px -42px rgba(45,44,43,.42), 0 16px 40px -22px rgba(45,44,43,.28);
     }
+    /* The prototype is built to a fixed 390px width; render the iframe at that width
+       and scale it to fit the frame (set by JS) so its content never clips on mobile. */
     .au-proto-frame iframe {
-      position: absolute; inset: 8px; width: calc(100% - 16px); height: calc(100% - 16px);
+      position: absolute; top: 8px; left: 8px; width: calc(100% - 16px); height: calc(100% - 16px);
       border: 0; border-radius: 36px; background: #fff; display: block;
+      transform-origin: top left;
     }
     .au-proto-cta {
       margin-top: clamp(1.75rem, 4vw, 2.5rem);
@@ -325,6 +328,28 @@
         });
       }, { threshold: 0.16, rootMargin: '0px 0px -8% 0px' });
       els.forEach(function (el) { io.observe(el); });
+    })();
+
+    /* Prototype is built to a fixed 390px width. Render the iframe at 390px and
+       scale it to fit the frame, so its content never clips on narrow (mobile) frames. */
+    (function () {
+      var frame = document.querySelector('.au-proto-frame');
+      var iframe = frame && frame.querySelector('iframe');
+      if (!frame || !iframe) return;
+      var DESIGN_W = 390;
+      function fit() {
+        var innerW = frame.clientWidth - 16;   // 8px padding each side
+        var innerH = frame.clientHeight - 16;
+        if (innerW <= 0) return;
+        var scale = innerW / DESIGN_W;
+        iframe.style.width = DESIGN_W + 'px';
+        iframe.style.height = (innerH / scale) + 'px';
+        iframe.style.transform = 'scale(' + scale + ')';
+      }
+      fit();
+      iframe.addEventListener('load', fit);
+      if ('ResizeObserver' in window) { new ResizeObserver(fit).observe(frame); }
+      else { window.addEventListener('resize', fit, { passive: true }); }
     })();
   </script>
 </body>
