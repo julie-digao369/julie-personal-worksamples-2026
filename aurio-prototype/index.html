@@ -10,7 +10,7 @@
   <link rel="apple-touch-icon" href="icon-180.png">
   <title>Aurio</title>
   <link rel="preload" as="image" href="启动页背景图.webp" fetchpriority="high">
-  <link rel="preload" as="image" href="产品图.png" fetchpriority="high">
+  <link rel="preload" as="image" href="product-glasses.webp" fetchpriority="high">
   <style>
     /* Noto Sans SC — used for the device name ("Aurio Smart") + the big volume number */
     @font-face {
@@ -3918,7 +3918,7 @@
             <span class="pair-ring"></span>
             <span class="pair-core"></span>
             <span class="pair-spinner"></span>
-            <img class="pair-hero-img" id="pairHeroImg" src="产品图.png" alt="" />
+            <img class="pair-hero-img" id="pairHeroImg" src="product-glasses.webp" alt="" />
           </div>
           <p class="pair-hint" id="pairHint">Press and hold the temple button until the light pulses.</p>
           <div class="pair-ears" id="pairEars" aria-hidden="true">
@@ -3934,7 +3934,7 @@
       <div class="splash-overlay active" id="splashOverlay">
         <span class="splash-mark">Aurio</span>
         <div class="splash-stage">
-          <img class="splash-glasses" src="产品图.png" alt="Aurio Smart glasses" fetchpriority="high" decoding="async" />
+          <img class="splash-glasses" src="product-glasses.webp" alt="Aurio Smart glasses" fetchpriority="high" decoding="async" />
           <h1 class="splash-title">Hearing aids<br><em>hidden in glasses.</em></h1>
         </div>
         <button class="splash-cta" id="splashExplore">Get started</button>
@@ -3945,7 +3945,7 @@
         <button class="gr-back" id="grBack" type="button" aria-label="Back">
           <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 6 9 12 15 18"/></svg>
         </button>
-        <img class="gr-hero" src="case-hero.jpg" width="780" height="717"
+        <img class="gr-hero" src="case-hero.webp" width="780" height="717"
              alt="Aurio Smart glasses resting in their open charging case" />
         <h1 class="gr-title">Get your aids ready</h1>
         <ol class="gr-steps">
@@ -5271,7 +5271,7 @@
       const clearPairTimers = () => { pairTimers.forEach(t => clearTimeout(t)); pairTimers = []; };
       const after = (ms, fn) => { pairTimers.push(setTimeout(fn, ms)); };
       // The one product this app pairs with.
-      const PRODUCT = { name: 'Aurio Smart', img: '产品图.png', hint: 'Press and hold the temple button until the light pulses.' };
+      const PRODUCT = { name: 'Aurio Smart', img: 'product-glasses.webp', hint: 'Press and hold the temple button until the light pulses.' };
       let selectedDevice = PRODUCT.name;
 
       // Each stage maps to a status line, button label, and progress dot.

@@ -9,7 +9,7 @@
   <meta property="og:title" content="Aurio Smart Hearing Aids Control App · Julie Di Gao" />
   <meta property="og:description" content="Interaction design for a control app for hearing aids hidden inside glasses. Pairing, volume, tone, and noise built around plain language. Live to try." />
   <meta property="og:url" content="https://juliedigao.info/aurio-app.html" />
-  <meta property="og:image" content="https://juliedigao.info/img/aurio-thumb.webp" />
+  <meta property="og:image" content="https://juliedigao.info/img/aurio-hero-group.webp" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="canonical" href="https://juliedigao.info/aurio-app.html" />
   <link rel="preload" href="fonts/dm-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -134,6 +134,22 @@
       position: absolute; inset: 8px; width: calc(100% - 16px); height: calc(100% - 16px);
       border: 0; border-radius: 36px; background: #fff; display: block;
     }
+    .au-proto-cta {
+      margin-top: clamp(1.75rem, 4vw, 2.5rem);
+      display: inline-flex; align-items: center; gap: .55rem;
+      padding: .9rem 1.7rem; font-family: var(--font); font-weight: 600; font-size: 1rem;
+      color: #E6E7E2; background: #2D2C2B; border-radius: 100px; text-decoration: none;
+      box-shadow: 0 16px 34px -18px rgba(45,44,43,.55);
+      transition: transform .25s cubic-bezier(.16,1,.3,1), background-color .25s ease, box-shadow .25s ease;
+    }
+    .au-proto-cta:hover { background: #41454F; transform: translateY(-2px); box-shadow: 0 22px 44px -18px rgba(45,44,43,.6); }
+    .au-proto-cta:focus-visible { outline: 2px solid #41454F; outline-offset: 3px; }
+    .au-proto-cta svg { transition: transform .25s cubic-bezier(.16,1,.3,1); }
+    .au-proto-cta:hover svg { transform: translate(2px, -2px); }
+    .au-proto-hint {
+      margin: .85rem 0 0; font-family: var(--font); font-size: .85rem;
+      color: #595d66; text-align: center; letter-spacing: .01em;
+    }
     /* ── Closing CTA: near-black warm banner (#2D2C2B) ── */
     .au-cta {
       background: #2D2C2B;
@@ -187,7 +203,7 @@
     .au-explain-inner .au-card:nth-child(3) { --rd: 240ms; }
 
     @media (prefers-reduced-motion: reduce) {
-      .au-cta a { transition: none; }
+      .au-cta a, .au-proto-cta, .au-proto-cta svg { transition: none; }
       .js-anim .au-reveal { opacity: 1; transform: none; transition: none; }
     }
   </style>
@@ -229,7 +245,7 @@
           </div>
         </div>
         <div class="au-hero-visual au-reveal is-heavy d1">
-          <img class="au-hero-art" src="img/aurio-hero-group.webp" width="1250" height="1576" alt="A woman wearing the Aurio glasses, with the app's volume control and Smart Program cards floating beside her" fetchpriority="high" />
+          <img class="au-hero-art" src="img/aurio-hero-group.webp?v=2" width="1250" height="1576" alt="A woman wearing the Aurio glasses, with the app's volume control and Smart Program cards floating beside her" fetchpriority="high" />
         </div>
       </div>
     </section>
@@ -239,21 +255,21 @@
       <div class="au-explain-inner">
         <article class="au-card au-reveal">
           <div class="au-card-media is-center">
-            <img src="img/rams-braun-radio.webp" width="880" height="866" alt="Dieter Rams Braun radio with one large tuning dial, the reference for the volume control" loading="lazy" />
+            <img src="img/rams-braun-radio.webp?v=2" width="770" height="758" alt="Dieter Rams Braun radio with one large tuning dial, the reference for the volume control" loading="lazy" />
           </div>
           <h3>Built around one dial</h3>
           <p>Volume is the control people reach for most, so it gets the most room on the home screen. The dial is shaped like an old radio, familiar in the hand and a quiet nod to Dieter Rams' Braun design.</p>
         </article>
         <article class="au-card au-reveal">
           <div class="au-card-media is-center">
-            <img src="img/aurio-semantics.webp?v=3" width="748" height="648" alt="The same app shown in three color modes: a quiet lavender mode, a warm conversation mode, and a green outdoors mode" loading="lazy" />
+            <img src="img/aurio-semantics.webp?v=4" width="700" height="607" alt="The same app shown in three color modes: a quiet lavender mode, a warm conversation mode, and a green outdoors mode" loading="lazy" />
           </div>
           <h3>Color does the talking</h3>
           <p>Each listening mode has its own color and icon. Switch to Conversation, Outdoors, or Quiet and the whole screen shifts to match. You read the mode before you read a word.</p>
         </article>
         <article class="au-card au-reveal">
           <div class="au-card-media is-center">
-            <img src="img/aurio-ai-loop.webp" width="1400" height="1400" alt="The design loop: a Figma design concept becomes a Claude Code HTML prototype, then returns to a Figma UI kit, connected by MCP" loading="lazy" />
+            <img src="img/aurio-ai-loop.webp?v=2" width="760" height="760" alt="The design loop: a Figma design concept becomes a Claude Code HTML prototype, then returns to a Figma UI kit, connected by MCP" loading="lazy" />
           </div>
           <h3>Figma to code, and back</h3>
           <p>Premium feel lives in the micro interactions, and those are hard to judge from a flat mockup. So I built the prototype in HTML with Claude Code. The team felt the real thing early, which cut the back-and-forth and the build time.</p>
@@ -266,8 +282,15 @@
       <h2 class="au-showcase-title au-reveal">Try it. Feel it yourself.</h2>
       <div class="au-proto au-reveal is-heavy d1">
         <div class="au-proto-frame">
-          <iframe src="aurio-prototype/index.html" title="Aurio control app, live interactive prototype" loading="lazy"></iframe>
+          <!-- Loaded from the GitHub Pages origin, which sends no X-Frame-Options. The juliedigao.info
+               domain (Cloudflare) sets X-Frame-Options: DENY, which blocks the same-origin embed. -->
+          <iframe src="https://julie-digao369.github.io/julie-personal-worksamples-2026/aurio-prototype/index.html" title="Aurio control app, live interactive prototype" loading="lazy"></iframe>
         </div>
+        <a class="au-proto-cta" href="https://smart-device-control-app.julie-gao369.workers.dev/" target="_blank" rel="noopener">
+          Open the full app
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>
+        </a>
+        <p class="au-proto-hint">Best on a phone, full screen.</p>
       </div>
     </section>
 
