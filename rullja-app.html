@@ -12,11 +12,12 @@
   <meta property="og:image" content="https://juliedigao.info/img/rullja/rullja-software.webp" />
     <meta name="twitter:card" content="summary_large_image" />
     
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <!-- Self-hosted libraries (no external CDNs, so the page loads behind the GFW in China) -->
+    <link rel="stylesheet" href="rullja-vendor/tailwind.css" />
+    <link rel="stylesheet" href="rullja-vendor/fontawesome/css/all.min.css" />
+    <script src="rullja-vendor/chart.umd.min.js"></script>
+
+    <link rel="stylesheet" href="rullja-vendor/leaflet/leaflet.css" />
     <link rel="canonical" href="https://juliedigao.info/rullja-app.html" />
   <link rel="preload" href="fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="fonts.css" />
@@ -333,7 +334,7 @@
                         <div class="flex items-center gap-4">
                             <div class="flex items-center gap-3">
                                 <div class="w-9 h-9 rounded-full bg-blue-100 flex items-center justify-center overflow-hidden">
-                                    <img src="https://ui-avatars.com/api/?name=Siddhesh+Garg&background=EBF4FF&color=1E3A8A" alt="Collector" class="w-full h-full object-cover">
+                                    <img src="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'128'%20height%3D'128'%3E%3Crect%20width%3D'128'%20height%3D'128'%20fill%3D'%23EBF4FF'%2F%3E%3Ctext%20x%3D'64'%20y%3D'82'%20font-family%3D'Inter%2CArial%2Csans-serif'%20font-size%3D'52'%20font-weight%3D'600'%20fill%3D'%231E3A8A'%20text-anchor%3D'middle'%3ESG%3C%2Ftext%3E%3C%2Fsvg%3E" alt="Collector" class="w-full h-full object-cover">
                                 </div>
                                 <div>
                                     <h5 class="font-bold text-sm">Siddhesh Garg</h5>
@@ -1140,7 +1141,7 @@
 
     </main>
 
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="rullja-vendor/leaflet/leaflet.js"></script>
 
     <script>
         // --- 1. LEAFLET MAP INITIALIZATION ---
@@ -1189,12 +1190,15 @@
         };
 
         function initMap() {
-            map = L.map('dashboardMap').setView([48.7823, 9.1770], 14);
+            map = L.map('dashboardMap', { minZoom: 12, maxZoom: 17 }).setView([48.7823, 9.1770], 14);
 
-            L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+            // Self-hosted Stuttgart tiles (carto light_all, z12-15) so the map renders in China.
+            // maxNativeZoom upscales z15 tiles past the captured range instead of showing gaps.
+            L.tileLayer('rullja-vendor/tiles/{z}/{x}/{y}.png', {
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-                subdomains: 'abcd',
-                maxZoom: 20
+                minNativeZoom: 12,
+                maxNativeZoom: 15,
+                maxZoom: 17
             }).addTo(map);
 
             Object.keys(routeData).forEach(routeId => {
@@ -1320,6 +1324,13 @@
             }
         }
 
+        // Inline initials avatar (no external avatar service, so it renders in China).
+        function avatarDataURI(name) {
+            const initials = name.trim().split(/\s+/).map(w => w[0]).join('').slice(0, 2).toUpperCase();
+            const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='128' height='128'><rect width='128' height='128' fill='#EBF4FF'/><text x='64' y='82' font-family='Inter,Arial,sans-serif' font-size='52' font-weight='600' fill='#1E3A8A' text-anchor='middle'>${initials}</text></svg>`;
+            return 'data:image/svg+xml,' + encodeURIComponent(svg);
+        }
+
         function updateDriverCard(routeId) {
             const drivers = {
                 '12337': { name: 'Siddhesh Garg', vehicle: 'STG-3765' },
@@ -1332,7 +1343,7 @@
                 const img = card.querySelector('img');
                 const h5 = card.querySelector('h5');
                 const pInfo = card.querySelector('h5 + p');
-                if (img) img.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(d.name)}&background=EBF4FF&color=1E3A8A`;
+                if (img) img.src = avatarDataURI(d.name);
                 if (h5) h5.textContent = d.name;
                 if (pInfo) pInfo.textContent = `${d.vehicle} · Route #${routeId}`;
             }
